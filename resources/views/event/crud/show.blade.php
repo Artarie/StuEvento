@@ -16,36 +16,26 @@
       <table class="table table-hover">
         <thead>
           <tr>
-            <th>Acciones</th>
             <th>Titulo</th>
             <th>Descripción</th>
             <th>Localidad</th>
             <th>Fecha</th>
-    
+            <th>Asistentes</th>
           </tr>
         </thead>
         <tbody>
-          @foreach($events as $event)
           <tr>
-            <td nowrap> 
-            <a href="events/{{$event->id}}" class="btn btn-primary">Show
-                <i class="fa fa-pencil"></i>
-              </a>
-              <a href="events/{{$event->id}}/register" class="btn btn-primary">Añadir asistente
-                <i class="fa fa-pencil"></i>
-              </a>
 
-              <a href="events/{{$event->id}}/edit" class="btn btn-primary">Editar Evento
-                <i class="fa fa-pencil"></i>
-              </a>
-            </td>
             <td>{{$event->title}}</td>
             <td>{{$event->description}}</td>
             <td>{{$event->location}}</td>
             <td>{{$event->date}}</td>
-          
+            <td>@foreach($users as $user)
+              {{ $user}}
+              <br>
+                @endforeach
+            </td>
           </tr>
-         @endforeach
         </tbody>
 
       </table>

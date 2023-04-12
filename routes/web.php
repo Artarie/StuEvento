@@ -25,24 +25,26 @@ Route::get('/dashboard', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileControllr::class, 'update'])->name('profile.update');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::get('/events', [EventController::class, 'index'])->name('event.index');
 
 });
 
-Route::prefix('/events', function() {
-    Route::get('/',)->name('event.index');
-    Route::get('/create',)->name('event.create');
-    Route::get('/',)->name('event.store');
-    Route::get('/{id}',)->name('event.show');
-    Route::get('/{id}/register',)->name('event.register');
-    Route::get('/{id}/attendees',)->name('event.storeAttendee');
-    Route::get('/{id}/edit',)->name('event.edit');
-    Route::put('/{id}',)->name('event.update');
-
-
+Route::prefix('/events')->group(function(){
+    Route::get('/', [EventController::class, 'index'])->name('event.index');
+    Route::get('/create', [EventController::class, 'create'])->name('event.create');
+    Route::post('/', [EventController::class, 'store'])->name('event.store');
+    Route::get('/{id}', [EventController::class, 'show'])->name('event.show');
+    Route::get('/{id}/register', [EventController::class, 'registerAttendee'])->name('event.register');
+    Route::post('/{id}/attendees',  [EventController::class, 'storeAttendee'])->name('event.storeAttendee');
+    Route::get('/{id}/edit', [EventController::class, 'edit'])->name('event.edit');
+    Route::put('/{id}', [EventController::class, 'update'])->name('event.update');
 
 });
+
+
+
+
+
 
 require __DIR__.'/auth.php';
