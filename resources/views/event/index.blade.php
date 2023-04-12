@@ -13,6 +13,14 @@
                 <div>
       <a href="{{route('event.create')}}" type="button" class="btn btn-primary">CREAR EVENTO</a>
     </div>
+    @if(session('success'))
+      <div class="alert alert-success">
+        {{ session('success') }}
+      </div>
+      @endif
+
+    
+
       <table class="table table-hover">
         <thead>
           <tr>

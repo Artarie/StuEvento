@@ -13,7 +13,7 @@ class EventController extends Controller
 {
     public function index()
     {
-        $event = Event::all()->sortBy("title");
+        $event = Event::where('user_id', Auth::user()->id)->get();
 
         return view('event.index', [
             'events' => $event,
@@ -93,14 +93,10 @@ class EventController extends Controller
 
         if (UserEventAttendee::where('user_id', '=', $request->input('attendee'))
         ->where('event_id', '=', $id)
-        ->exists()) {
-            $event = Event::find($id);
-            $users = User::all()->sortBy('name');
-          
-            return view('event.crud.registerAtt', [
-                'event' => $event,
-                'users' => $users,
-            ])->with('error', 'Asistente ya existe en este evento!');
+        ->exists()) 
+        {
+
+            return redirect()->back()->with('error', 'Este asistente ya existe en el evento!');
             
          }else{
 

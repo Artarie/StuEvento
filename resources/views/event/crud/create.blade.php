@@ -14,6 +14,7 @@
                         <div class="form-group" style="width: 75%; margin: auto;">
                             @csrf
                             @method('POST')
+                           
                             <br>
                             Título <input type="text" name="title" class="form-control" />
                             <br>
@@ -23,8 +24,8 @@
                             Localidad<input type="text" name="location" class="form-control" />
                             <br>
                             Fecha <input type="date" name="date" class="form-control" />
-
-
+                            <br>
+                            <p>Creado por: {{Auth::user()->name}}
                             <br>
                             <input type="submit" class="btn btn-primary" style="text-align:center;">
                         </div>
