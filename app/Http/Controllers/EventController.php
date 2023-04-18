@@ -11,6 +11,15 @@ use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
+
+    public function allEvents()
+    {
+        $event = Event::all();
+
+        return view('dashboard', [
+            'events' => $event,
+        ]);
+    }
     public function index()
     {
         $event = Event::where('user_id', Auth::user()->id)->get();
